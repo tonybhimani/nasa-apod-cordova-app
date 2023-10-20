@@ -1,0 +1,33 @@
+{
+  "name": "com.tonybhimani.apodnasa",
+  "displayName": "nasa-apod-cordova-app",
+  "version": "1.0.0",
+  "description": "Simple application using the NASA APOD API to get the Astromomy Picture of the Day",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^9.1.0",
+    "cordova-plugin-fetch": "github:aporat/cordova-plugin-fetch",
+    "cordova-plugin-whitelist": "^1.3.4"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-fetch": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
