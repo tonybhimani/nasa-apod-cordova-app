@@ -15,31 +15,30 @@ function onDeviceReady() {
 			},
 		})
 		.then(function(response) {
-			return response.text()
-		}).then(function(content) {
+			return response.json();
+		}).then(function(response) {
 			try {
-				// parse json response
-				const response = JSON.parse(content);
-
 				// outer container
 				const container = document.getElementById("container");
 
 				// create card apod title, content, and copyright
 				const cardTitle = document.createElement("h5");
 				cardTitle.className = "card-title";
-				cardTitle.innerText = response.title.htmlEntities();
+				cardTitle.innerText = DOMPurify.sanitize(response.title);
 				const cardSubTitle = document.createElement("h6");
 				cardSubTitle.className = "card-subtitle mb-2 text-muted";
-				cardSubTitle.innerText = "Copyright (c) " + response.copyright.htmlEntities();
+				cardSubTitle.innerHTML = "Copyright &copy; " + DOMPurify.sanitize(response.copyright);
 				const cardExplanation = document.createElement("p");
 				cardExplanation.className = "card-text";
-				cardExplanation.innerText = response.explanation.htmlEntities();
+				cardExplanation.innerText = DOMPurify.sanitize(response.explanation);
 
 				// create card body and add the elements
 				const cardBody = document.createElement("div");
 				cardBody.className = "card-body";
 				cardBody.appendChild(cardTitle);
-				cardBody.appendChild(cardSubTitle);
+				if (response.copyright) {
+					cardBody.appendChild(cardSubTitle);
+				}
 				cardBody.appendChild(cardExplanation);
 
 				// app title and heading
