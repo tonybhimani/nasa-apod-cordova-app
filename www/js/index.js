@@ -50,7 +50,7 @@ function onDeviceReady() {
 				// media (image or video)
 				const cardImage = document.createElement("img");
 				cardImage.src = response.url;
-				cardImage.alt = response.title.htmlEntities();
+				cardImage.alt = DOMPurify.sanitize(response.title);
 				cardImage.className = "card-img-top";
 
 				// create card element
@@ -68,12 +68,18 @@ function onDeviceReady() {
 				container.innerHTML = "";
 				container.appendChild(rowElement);
 			} catch (err) {
-				// show error message
+				// show render/parse error message
 				const content = document.getElementById("content");
 				content.innerHTML = "";
 				content.appendChild(document.createTextNode(err));
 			}
 		})
+		.catch (function(err) {
+			// show fetch error message
+			const content = document.getElementById("content");
+			content.innerHTML = "";
+			content.appendChild(document.createTextNode(err));			
+		});
 }
 
 // convert to html entites
